@@ -132,3 +132,26 @@ type Sum<A extends number, B extends number> = Concat<
 >["length"];
 
 type T25 = Sum<100, 23>;
+
+/* 练习题：
+01. 请定义一个高级类型StartsWith<A, B>判断字符串字面量类型是否以某个前缀字符类型开头。
+    StartsWith<"typescript", "t">  // true
+    StartsWith<"typescript", "a">  // false
+10. 请定义一个高级类型Replace<A, B, C>可以在A中把B替换为C。
+    Replace<"typescript", "type", "java"> // javascript
+    Replace<"typescript", "java", "js">   // typescript
+11. 请定义一个高级类型Trim<A> 能够去掉字符串字面量类型中的空白字符。
+    Trim<"a b c"> // "abc"
+100.请定义一个高级类型CapitalizeStr<A> 把一个字符串字面量类型的A 转为首字母大写(提示：使用内置类型Uppercase)。
+    CapitalizeStr<"abc"> // Abc
+101.请定义一个高级类型CamelCase<A> 将字符串字面量类型驼峰化处理。
+    CamelCase<"dong_dong_dong"> // "dongDongDong"
+110.请定义一个高级类型MapType<A> 将key和value作重复。
+    MapType<{a:1, b: 2}> // {aa: [1,1], bb: [22]}
+ */
+// TypeScript 对联合类型在条件类型中使用时的特殊处理：会把联合类型的每一个元素类型单独传入做类型计算，最后合并。
+type UppercaseA<Item extends string> = Item extends "a"
+  ? Uppercase<Item>
+  : Item;
+
+type T = UppercaseA<"a" | "b" | "c">;
